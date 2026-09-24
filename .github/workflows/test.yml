@@ -1,0 +1,15 @@
+name: Test des quatre prix publics
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  prices:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Vérifier PHP DOM
+        run: php -r 'exit(class_exists("DOMDocument") ? 0 : 1);'
+      - name: Vérifier les quatre offres
+        run: python3 collect.py
